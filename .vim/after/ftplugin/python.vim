@@ -17,9 +17,6 @@ set textwidth=80
 "  SimpylFold mapping fold toggle
 nnoremap <Space> za
 
-" Syntastic syntax checkers for python
-let g:syntastic_python_checkers = [ 'bandit', 'pyflakes' ] ", 'flake8' ]
-
 " Virtual environment for python used in plugins
 python3 << EOF
 import os

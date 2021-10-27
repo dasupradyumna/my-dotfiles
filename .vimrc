@@ -23,11 +23,11 @@ Plug 'itchyny/lightline.vim'      " Lightline configurable status
 
 Plug 'tpope/vim-fugitive'         " Git plugin for vim
 
-Plug 'airblade/vim-gitgutter'     " Git line changes beside numbers column
+Plug 'airblade/vim-gitgutter'     " Git line changes in gutter column
 
 Plug 'ycm-core/YouCompleteMe'     " General code completion and semantic comprehension engine
 
-Plug 'vim-syntastic/syntastic'    " Syntax checker plugin
+Plug 'dense-analysis/ale'         " Asynchronous Lint Engine, syntax checking
 
 " Plug 'preservim/nerdtree'         " File system tree explorer
 
@@ -47,8 +47,8 @@ source ~/.vim/general.vim
 source ~/.vim/gitgutter.vim
 
 
-"""""" SYNTASTIC
-source ~/.vim/syntastic.vim
+"""""" ALE
+source ~/.vim/ale.vim
 
 
 """""" YOUCOMPLETEME
