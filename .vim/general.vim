@@ -33,7 +33,7 @@ set showmatch                   " Highlights matching brackets of any type
 
 colorscheme moonfly
 set background=dark
-set termguicolors               " 
+set termguicolors               " Enable true color support for terminal
 syntax enable                   " Enable syntax highlighting
 
 
