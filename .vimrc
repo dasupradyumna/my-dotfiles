@@ -25,6 +25,8 @@ Plug 'tpope/vim-fugitive'         " Git plugin for vim
 
 Plug 'airblade/vim-gitgutter'     " Git line changes beside numbers column
 
+Plug 'ycm-core/YouCompleteMe'     " General code completion and semantic comprehension engine
+
 Plug 'vim-syntastic/syntastic'    " Syntax checker plugin
 
 " Plug 'preservim/nerdtree'         " File system tree explorer
@@ -37,16 +39,20 @@ call plug#end()
 source ~/.vim/general.vim
 
 
-"""""" GITGUTTER
-source ~/.vim/gitgutter.vim
-
-
 """""" NERDTREE
 " source ~/.vim/nerdtree.vim
 
 
+"""""" GITGUTTER
+source ~/.vim/gitgutter.vim
+
+
 """""" SYNTASTIC
 source ~/.vim/syntastic.vim
+
+
+"""""" YOUCOMPLETEME
+source ~/.vim/ycm.vim
 
 
 """""" LIGHTLINE

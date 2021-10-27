@@ -10,6 +10,7 @@ let g:gitgutter_sign_removed_first_line = '^'
 let g:gitgutter_sign_modified_removed = '<'
 
 " Update time period for signs column
-set updatetime=250
+set updatetime=100
 
-
+" Automatically refresh gitgutter signs column
+autocmd! FocusGained,CursorHold * GitGutter
