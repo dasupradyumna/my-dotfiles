@@ -29,6 +29,10 @@ Plug 'ycm-core/YouCompleteMe'     " General code completion and semantic compreh
 
 Plug 'dense-analysis/ale'         " Asynchronous Lint Engine, syntax checking
 
+Plug 'tmhedberg/SimpylFold'       " Code folding for python
+
+Plug 'Konfekt/FastFold'           " Speed up code folding in vim
+
 " Plug 'preservim/nerdtree'         " File system tree explorer
 
 call plug#end()
@@ -53,6 +57,10 @@ source ~/.vim/ale.vim
 
 """""" YOUCOMPLETEME
 source ~/.vim/ycm.vim
+
+
+"""""" FOLDING
+source ~/.vim/fold.vim
 
 
 """""" LIGHTLINE
