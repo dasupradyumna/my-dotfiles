@@ -47,11 +47,11 @@ function! Filepath(fullpath)
     return ''
   endif
 
-  let readonly = (a:fullpath == 1) ? '' : (&readonly ? '[ro] ' : '')
-  let filepath = (a:fullpath == 1) ? expand('%:p') : expand('%:t')
+  let readonly = a:fullpath == 1 ? '' : (&readonly ? '[ro] ' : '')
+  let filepath = a:fullpath == 1 ? expand('%:p') : expand('%:t')
   let filename = filepath !=# '' ? filepath : '[Unnamed]'
-  let modified = &modified ? ' +' : ''
-  return readonly . filename . modified
+  let modified = &modified ? '* ' : ''
+  return readonly . modified . filename
 endfunction
 
 " Component function for current file name
@@ -78,7 +78,7 @@ function! BranchHead()
   if winwidth(0) <= 70 || has_key(s:filetypemap, &filetype)
     return ''
   endif
-  return exists('*FugitiveHead') ? FugitiveHead() : ''
+  return exists('*FugitiveHead') ? '⌥ ' . FugitiveHead() : ''
 endfunction
 
 " Component function for file type
@@ -90,17 +90,69 @@ function! Filetype()
   endif
 endfunction
 
+" Indicator symbols to print beside count values
+let s:indicators = {
+\   'error': '᙭ ',
+\   'info': 'ⓘ ',
+\   'warning': ' ⃠ ',
+\ }
+
+" Helper function for ALE indicator functions
+function! AleStatuslineCount(type)
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:count_val = a:type == 'error'
+                  \ ? printf('%d,%d',
+                  \     get(l:counts, 'error', 0),
+                  \     get(l:counts, 'style_error', 0))
+                  \ : string(get(l:counts, a:type, 0))
+  return l:count_val == '0' || l:count_val == '0,0'
+  \   ? '' : printf('%s%s', get(s:indicators, a:type, ''), l:count_val)
+endfunction
+
+" Error count
+function! AleErrorCount()
+  return AleStatuslineCount('error')
+endfunction
+
+" Warning count
+function! AleWarningCount()
+  return AleStatuslineCount('warning')
+endfunction
+
+" Info count
+function! AleInfoCount()
+  return AleStatuslineCount('info')
+endfunction
+
+
 " Main dictionary with all the configurations
 let g:lightline = {
 \   'colorscheme': 'one',
+\
 \   'active': {
 \     'left': [ [ 'amode' ], [ 'filename' ] ],
-\     'right': [ [ 'lineinfo' ], [ 'head' ], [ 'filetype' ] ]
+\     'right': [ [ 'lineinfo' ], [ 'head' ],
+\                [ 'aleerr', 'alewarn', 'aleinfo' ],
+\                [ 'filetype' ] ]
 \   },
+\
 \   'inactive': {
 \     'left': [ [ 'iamode' ], [ 'fullpath' ] ],
 \     'right': [ ]
 \   },
+\
+\   'component_type': {
+\     'aleinfo': 'info',
+\     'alewarn': 'warning',
+\     'aleerr': 'error',
+\   },
+\
+\   'component_expand': {
+\     'aleinfo': 'AleInfoCount',
+\     'alewarn': 'AleWarningCount',
+\     'aleerr': 'AleErrorCount',
+\   },
+\
 \   'component_function': {
 \     'amode': 'AMode',
 \     'iamode': 'IAMode',
