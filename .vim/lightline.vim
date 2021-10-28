@@ -74,11 +74,11 @@ function! Lineinfo()
 endfunction
 
 " Component function for HEAD of current Git repository (if any)
-function! Branchhead()
+function! BranchHead()
   if winwidth(0) <= 70 || has_key(s:filetypemap, &filetype)
     return ''
   endif
-  return exists('*fugitive#head') ? fugitive#head : ''
+  return exists('*FugitiveHead') ? FugitiveHead() : ''
 endfunction
 
 " Component function for file type
