@@ -6,6 +6,7 @@
 
 filetype plugin indent on       " Load plugins and indent settings for active file
 set nocompatible                " Disable compatibility with Vi
+let mapleader = ','             " Leader key in mappings
 
 
 """ Vim interface options

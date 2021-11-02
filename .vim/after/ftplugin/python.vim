@@ -15,6 +15,7 @@ set tabstop=4
 set textwidth=80
 
 "  SimpylFold mapping fold toggle
+set foldmethod=indent
 nnoremap <Space> za
 
 " Virtual environment for python used in plugins

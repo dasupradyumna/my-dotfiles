@@ -1,7 +1,6 @@
 " Code folding configuration file
-" SimpylFold and FastFold
 
-set foldmethod=indent
-set foldlevel=1
+set foldmethod=syntax
+set foldlevel=10
 
 let g:fastfold_savehook = 1

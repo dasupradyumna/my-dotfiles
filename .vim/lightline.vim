@@ -19,16 +19,35 @@ let s:filetypemap = {
 \   'vim-plug': 'VIM PLUG',
 \ }
 
+" Helper function to check if current window is running a terminal
+function! IsTerminal()
+  return get(getwininfo(win_getid())[0], 'terminal')
+endfunction
+
+" Helper function to check if current window is not user-related
+function! IsSpecialWindow()
+  let l:splitfilename = split(expand('%:t'), '\.')
+  return has_key(s:filetypemap, &filetype) ||
+         \ IsTerminal() ||
+         \ (len(l:splitfilename) != 0 && l:splitfilename[0] == 'vimspector') &&
+         \ (&filetype == '' || &filetype == 'VimspectorPrompt')
+endfunction
+
 " Fix lightline not loading correctly on startup
-autocmd VimEnter * call lightline#update()
+autocmd VimEnter,WinEnter * call lightline#update()
 
 " Helper function for Mode component functions
 function! Mode(active)
-  if a:active == 1
-    return get(s:filetypemap, &filetype, lightline#mode())
-  else
-    return get(s:filetypemap, &filetype, '')
-  endif
+  let l:splitfilename = split(expand('%:t'), '\.')
+  let l:defaultvalue = IsTerminal()
+                     \ ? 'TERMINAL'
+                     \ : (len(l:splitfilename) != 0 && l:splitfilename[0] == 'vimspector') &&
+                     \   (&filetype == '' || &filetype == 'VimspectorPrompt')
+                     \   ? l:splitfilename[1]
+                     \   : a:active == 1
+                     \     ? lightline#mode()
+                     \     : ''
+  return get(s:filetypemap, &filetype, l:defaultvalue)
 endfunction
 
 " Component function for active mode
@@ -43,11 +62,11 @@ endfunction
 
 " Helper function for Filename component functions
 function! Filepath(fullpath)
-  if has_key(s:filetypemap, &filetype)
+  if IsSpecialWindow()
     return ''
   endif
 
-  let readonly = a:fullpath == 1 ? '' : (&readonly ? '[ro] ' : '')
+  let readonly = a:fullpath == 1 ? '' : &readonly ? '[ro] ' : ''
   let filepath = a:fullpath == 1 ? expand('%:p') : expand('%:t')
   let filename = filepath !=# '' ? filepath : '[Unnamed]'
   let modified = &modified ? '* ' : ''
@@ -66,7 +85,7 @@ endfunction
 
 " Component function for cursor position in file
 function! Lineinfo()
-  if winwidth(0) <= 70 || has_key(s:filetypemap, &filetype)
+  if winwidth(0) <= 70 || IsSpecialWindow()
     return ''
   else
     return printf('%-1d,%-1d:%-1d', line('.'), col('.'), line('$'))
@@ -75,7 +94,7 @@ endfunction
 
 " Component function for HEAD of current Git repository (if any)
 function! BranchHead()
-  if winwidth(0) <= 70 || has_key(s:filetypemap, &filetype)
+  if winwidth(0) <= 70 || IsSpecialWindow()
     return ''
   endif
   return exists('*FugitiveHead') ? '⌥ ' . FugitiveHead() : ''
@@ -83,14 +102,14 @@ endfunction
 
 " Component function for file type
 function! Filetype()
-  if winwidth(0) <= 70 " || has_key(s:filetypemap, &filetype)
+  if winwidth(0) <= 70 || IsSpecialWindow()
     return ''
   else
     return &filetype
   endif
 endfunction
 
-" Indicator symbols to print beside count values
+" ALE Indicator symbols to print beside count values
 let s:indicators = {
 \   'error': '᙭ ',
 \   'info': 'ⓘ ',
@@ -106,7 +125,7 @@ function! AleStatuslineCount(type)
                   \     get(l:counts, 'style_error', 0))
                   \ : string(get(l:counts, a:type, 0))
   return l:count_val == '0' || l:count_val == '0,0'
-  \   ? '' : printf('%s%s', get(s:indicators, a:type, ''), l:count_val)
+  \   ? '' : printf('%s%s', get(s:indicators, a:type), l:count_val)
 endfunction
 
 " Error count

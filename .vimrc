@@ -33,6 +33,8 @@ Plug 'tmhedberg/SimpylFold'       " Code folding for python
 
 Plug 'Konfekt/FastFold'           " Speed up code folding in vim
 
+Plug 'puremourning/vimspector'    " Debugging system plugin for vim
+
 " Plug 'preservim/nerdtree'         " File system tree explorer
 
 call plug#end()
@@ -61,6 +63,10 @@ source ~/.vim/ycm.vim
 
 """""" FOLDING
 source ~/.vim/fold.vim
+
+
+"""""" VIMSPECTOR
+source ~/.vim/vimspector.vim
 
 
 """""" LIGHTLINE
