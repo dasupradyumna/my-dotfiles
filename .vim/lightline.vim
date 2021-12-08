@@ -34,7 +34,7 @@ function! IsSpecialWindow()
 endfunction
 
 " Fix lightline not loading correctly on startup
-autocmd VimEnter,WinEnter * call lightline#update()
+autocmd VimEnter,WinEnter,CursorHold * call lightline#update()
 
 " Helper function for Mode component functions
 function! Mode(active)

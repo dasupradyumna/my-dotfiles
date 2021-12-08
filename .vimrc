@@ -73,3 +73,10 @@ source ~/.vim/vimspector.vim
 source ~/.vim/lightline.vim
 
 
+"""""" TASKS
+let s:tasks_file = getcwd() . '/tasks.vim'
+if filereadable(expand(s:tasks_file))
+  execute 'source' s:tasks_file
+endif
+
+
