@@ -49,6 +49,10 @@ source ~/.vim/general.vim
 " source ~/.vim/nerdtree.vim
 
 
+"""""" NETRW
+source ~/.vim/netrw.vim
+
+
 """""" GITGUTTER
 source ~/.vim/gitgutter.vim
 

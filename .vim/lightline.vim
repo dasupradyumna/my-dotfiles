@@ -16,6 +16,7 @@ let s:filetypemap = {
 \   'gitcommit': 'COMMIT',
 \   'qf': 'INFO',
 \   'nerdtree': 'NERDTREE',
+\   'netrw': 'FILES',
 \   'vim-plug': 'VIM PLUG',
 \ }
 
