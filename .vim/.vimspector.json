@@ -1,0 +1,32 @@
+{
+  "$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json",
+
+  "configurations": {
+    "<DEBUG CONFIG>": {
+      "adapter": "debugpy",
+      "variables": {
+        "VENV_HOME": "/home/kenja/.virtualenv",
+        "VENV_NAME": "<VENV NAME>",
+        "CommandLineArgs": "<COMMAND LINE ARGS>"
+      },
+      "configuration": {
+        "request": "launch",
+        "type": "python",
+        "cwd": "${workspaceRoot}",
+        "python": [ "${VENV_HOME}/${VENV_NAME}/bin/python" ],
+        "program": "<FILE TO DEBUG>",
+        "args": [ "*${CommandLineArgs}" ],
+        "console": "integratedTerminal",
+        "stopOnEntry": true,
+        "justMyCode": true
+      },
+      "breakpoints": {
+        "exception": {
+          "raised" : "N",
+          "uncaught": "",
+          "userUnhandled": ""
+        }
+      }
+    }
+  }
+}

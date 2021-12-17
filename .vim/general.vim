@@ -54,8 +54,8 @@ set hlsearch                    " Highlight matches
 set ignorecase                  " Ignores the case of search strings
 set incsearch                   " See matches as you type (without pressing enter)
 set smartcase                   " Do not ignore case if search string has uppercase
-nmap <silent>
-  \ ,/ :nohlsearch<CR>          " Clear highlights of previous matches
+" Clear highlights of previous matches
+nmap <silent> <Leader>n :nohlsearch<CR>
 
 
 """ Command auto-completion options
@@ -63,8 +63,8 @@ nmap <silent>
 set wildmenu                    " Enable command completion
 set wildignorecase              " Ignore case when generating command matches
 set wildmode=longest:full,full  " Customize command completion options
-set wildignore=
-  \*.swp,*.bak,*.pyc            " Ignore these file extensions in auto completion
+" Ignore these file extensions in auto completion
+set wildignore=*.swp,*.bak,*.pyc
 
 
 """ Indentation options

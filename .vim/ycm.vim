@@ -22,4 +22,4 @@ nnoremap <Leader>gd :YcmCompleter GoToDefintion<CR>
 nnoremap <Leader>gD :YcmCompleter GoToDeclaration<CR>
 nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <Leader>gT :YcmCompleter GetType<CR>
-nnoremap <Leader>gR :YcmCompleter RefactorRename 
+nnoremap <Leader>gR :YcmCompleter RefactorRename

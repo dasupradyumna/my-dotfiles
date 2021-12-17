@@ -1,5 +1,7 @@
 " Code folding configuration file
 
+
+
 set foldmethod=syntax
 set foldlevel=10
 
