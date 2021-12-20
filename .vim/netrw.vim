@@ -1,4 +1,4 @@
-" NetRW configuration file
+""" NetRW configuration file
 
 
 
@@ -15,6 +15,9 @@ let g:netrw_browse_split = 4
 let g:netrw_list_hide = '.*\.swp$'
 let g:netrw_hide = 1
 
+" Command to use for 'D' keymap
+let g:netrw_localrmdir = 'rm -rf'
+
 " NetRW window number should always be 1, fixed position in any tab
 let s:netrw_winnr = 1
 
@@ -25,30 +28,30 @@ augroup NetRWAuto
   " Move window focus to file if not blank
   " NetRW window always has fixed size and position
   autocmd BufEnter *
-  \   if !gettabvar(tabpagenr(), 'NetrwIsOpen', 0) |
-  \     call settabvar(tabpagenr(), 'NetrwIsOpen', 1) |
-  \     let s:ActiveWin = empty(bufname()) ? 1 : 2 |
-  \     execute '15 Lexplore ' . getcwd() |
-  \     set winfixwidth |
-  \     set winfixheight |
-  \     execute s:ActiveWin . 'wincmd w' |
-  \     if tabpagenr('$') > 1 | unlet s:ActiveWin | endif |
-  \   elseif exists('s:ActiveWin') && &filetype ==# 'netrw' |
-  \     execute s:ActiveWin . 'wincmd w' |
-  \     unlet s:ActiveWin |
-  \   endif
+  \ if !gettabvar(tabpagenr(), 'NetrwIsOpen', 0) |
+  \   call settabvar(tabpagenr(), 'NetrwIsOpen', 1) |
+  \   let s:ActiveWin = empty(bufname()) ? 1 : 2 |
+  \   execute '15 Lexplore ' . getcwd() |
+  \   set winfixwidth |
+  \   set winfixheight |
+  \   execute s:ActiveWin . 'wincmd w' |
+  \   if tabpagenr('$') > 1 | unlet s:ActiveWin | endif |
+  \ elseif exists('s:ActiveWin') && &filetype ==# 'netrw' |
+  \   execute s:ActiveWin . 'wincmd w' |
+  \   unlet s:ActiveWin |
+  \ endif
 
   " Close the tab if NetRW is the only window left
   autocmd BufEnter *
-  \   if winnr('$') == 1 && &filetype ==# 'netrw' |
-  \     quit |
-  \   endif
+  \ if winnr('$') == 1 && &filetype ==# 'netrw' |
+  \   quit |
+  \ endif
 
   " Exit Vim if NetRW is the only window in the only tab
   autocmd BufEnter *
-  \   if tabpagenr('$') == 1 && winnr('$') == 1 && &filetype ==# 'netrw' |
-  \     quit |
-  \   endif
+  \ if tabpagenr('$') == 1 && winnr('$') == 1 && &filetype ==# 'netrw' |
+  \   quit |
+  \ endif
 
 augroup END
 

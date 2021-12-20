@@ -1,23 +1,23 @@
-" Lightline configuration file
+""" Lightline configuration file
 
 
 
-set noshowmode                 " Do not display current Vim mode
+set noshowmode                 " Do not display current Vim mode in command line
 
 " fugitive = Git
 " gitcommit = Git commit
 " git = Git log, Git diff, Git branch
 " fugitiveblame = Git blame
-" qf = Gclog, Git mergetool, Git difftool, Syntastic loc_list
+" qf = Gclog, Git mergetool, Git difftool
 let s:filetypemap = {
-\   'fugitive': 'FUGITIVE',
-\   'fugitiveblame': 'BLAME',
-\   'git': 'FUGITIVE',
-\   'gitcommit': 'COMMIT',
-\   'qf': 'INFO',
-\   'nerdtree': 'NERDTREE',
-\   'netrw': 'FILES',
-\   'vim-plug': 'VIM PLUG',
+\ 'fugitive': 'FUGITIVE',
+\ 'fugitiveblame': 'BLAME',
+\ 'git': 'FUGITIVE',
+\ 'gitcommit': 'COMMIT',
+\ 'qf': 'INFO',
+\ 'nerdtree': 'NERDTREE',
+\ 'netrw': 'FILES',
+\ 'vim-plug': 'VIM PLUG',
 \ }
 
 " Helper function to check if current window is running a terminal
@@ -112,9 +112,9 @@ endfunction
 
 " ALE Indicator symbols to print beside count values
 let s:indicators = {
-\   'error': '᙭ ',
-\   'info': 'ⓘ ',
-\   'warning': ' ⃠ ',
+\ 'error': '᙭ ',
+\ 'info': 'ⓘ ',
+\ 'warning': ' ⃠ ',
 \ }
 
 " Helper function for ALE indicator functions
@@ -126,7 +126,7 @@ function! AleStatuslineCount(type)
                   \     get(l:counts, 'style_error', 0))
                   \ : string(get(l:counts, a:type, 0))
   return l:count_val == '0' || l:count_val == '0,0'
-  \   ? '' : printf('%s%s', get(s:indicators, a:type), l:count_val)
+  \ ? '' : printf('%s%s', get(s:indicators, a:type), l:count_val)
 endfunction
 
 " Error count

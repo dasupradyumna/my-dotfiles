@@ -1,15 +1,16 @@
-" General options for Vim editing environment
+""" General options for Vim editing environment
 
 
 
-""" Basic options
+" Basic options
 
 filetype plugin indent on       " Load plugins and indent settings for active file
 set nocompatible                " Disable compatibility with Vi
 let mapleader = ','             " Leader key in mappings
+set updatetime=100              " Update time for CursorHold and other events
 
 
-""" Vim interface options
+" Vim interface options
 
 set backspace=indent,eol,start  " Allow backspace to move cursor over everything
 set belloff=all                 " Disable visual and audio error tones
@@ -19,7 +20,7 @@ set timeout timeoutlen=3000     " Timeout on user-defined mappings
 set ttimeout ttimeoutlen=10     " Timeout on key code
 
 
-""" Vim display options
+" Vim display options
 
 set display=lastline            " Add @@@ at end of lines that do not fit on screen
 set laststatus=2                " Display status line, even if there is only 1 file
@@ -30,7 +31,7 @@ set showcmd                     " Displays command keystrokes on bottom right
 set showmatch                   " Highlights matching brackets of any type
 
 
-""" Colorscheme options
+" Colorscheme options
 
 colorscheme moonfly
 set background=dark
@@ -38,17 +39,17 @@ set termguicolors               " Enable true color support for terminal
 syntax enable                   " Enable syntax highlighting
 
 
-""" File options
+" File options
 
-autocmd BufEnter,FocusGained,CursorHold *
-  \ checktime                   " Check and reload externally modified file
+autocmd BufEnter,CursorHold *
+\ checktime                     " Check and reload externally modified file
 set autoread                    " Reload modified files (only after a command)
 set encoding=utf-8              " UTF-8 File encoding
 set hidden                      " Hide buffer instead of closing when switching out
 set nobackup                    " Do not create backup files
 
 
-""" Search options
+" Search options
 
 set hlsearch                    " Highlight matches
 set ignorecase                  " Ignores the case of search strings
@@ -58,7 +59,7 @@ set smartcase                   " Do not ignore case if search string has upperc
 nmap <silent> <Leader>n :nohlsearch<CR>
 
 
-""" Command auto-completion options
+" Command auto-completion options
 
 set wildmenu                    " Enable command completion
 set wildignorecase              " Ignore case when generating command matches
@@ -67,7 +68,7 @@ set wildmode=longest:full,full  " Customize command completion options
 set wildignore=*.swp,*.bak,*.pyc
 
 
-""" Indentation options
+" Indentation options
 
 set autoindent                  " Enable simple context-free automatic indentation
 set expandtab                   " Convert tabs to spaces
@@ -77,13 +78,13 @@ set tabstop=2                   " File tab size in spaces (seen outside vim)
 set textwidth=100               " Break lines at a length of 100 characters
 
 
-""" Whitespace visualization options
+" Whitespace visualization options
 
 set list                        " Display whitespace characters
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 
-""" Windows and splits options
+" Windows and splits options
 
 set splitbelow                  " new horizontal split should open below current
 set splitright                  " new vertical split should open to right of current
@@ -94,7 +95,7 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 
-""" Custom user commands
+" Custom user commands
 
 
 " Close current file while keeping the window open

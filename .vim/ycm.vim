@@ -1,4 +1,4 @@
-" YouCompleteMe configuration file
+""" YouCompleteMe configuration file
 
 
 

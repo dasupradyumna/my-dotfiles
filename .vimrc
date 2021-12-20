@@ -1,4 +1,4 @@
-" Vim startup configuration file [ User level ]
+""" Vim startup configuration file [ User level ]
 
 
 
@@ -35,18 +35,12 @@ Plug 'Konfekt/FastFold'           " Speed up code folding in vim
 
 Plug 'puremourning/vimspector'    " Debugging system plugin for vim
 
-" Plug 'preservim/nerdtree'         " File system tree explorer
-
 call plug#end()
 
 
 
 """""" GENERAL
 source ~/.vim/general.vim
-
-
-"""""" NERDTREE
-" source ~/.vim/nerdtree.vim
 
 
 """""" NETRW

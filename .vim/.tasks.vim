@@ -1,13 +1,13 @@
-" Vim TASKS file
+""" Vim TASKS file
 
 
 
-""" List of all available tasks for current project
+" List of all available tasks for current project
 let g:tasksList = [ '<TASKS LIST>' ]
 command Tasks echo g:tasksList
 
 
-""" Command / function to run the task given as argument
+" Command / function to run the task given as argument
 function! RunTask(task)
   let s:set_env = '. venvON <VENV NAME>'     " for python virtual environments
 
@@ -16,12 +16,15 @@ function! RunTask(task)
   endif
 
   execute '!gnome-terminal --tab --working-directory=<CWD> -- /bin/bash -c ' .
-        \ "\'" . s:set_env . '; ' .
-        \ s:run_command . '; ' .
-        \ "read\'"
+  \ "\'" . s:set_env . '; ' .
+  \ 'echo ===== task [ ' . a:task . ' ] started ===== && echo; ' .
+  \ s:run_command . '; ' .
+  \ 'echo && echo ===== task [ ' . a:task . ' ] completed =====; ' .
+  \ "read\'"
 
 endfunction
 
+" Autocompletion function for 'Run' command
 function! RunComplete(ArgLead, CmdLine, CursorPos)
   return g:tasksList
 endfunction

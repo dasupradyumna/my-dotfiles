@@ -1,4 +1,4 @@
-" ALE configuration file
+""" ALE configuration file
 
 
 
@@ -17,9 +17,9 @@ augroup ALE
   autocmd!
   " Close corresponding location list when a window is closed
   autocmd BufHidden *
-  \   if get(getloclist(0, { 'winid': 0 }), 'winid', 0) != 0 |
-  \     lclose |
-  \   endif
+  \ if get(getloclist(0, { 'winid': 0 }), 'winid', 0) != 0 |
+  \   lclose |
+  \ endif
 augroup END
 
 " Use only the linters specified in the options

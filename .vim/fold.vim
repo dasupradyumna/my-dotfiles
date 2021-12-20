@@ -1,4 +1,4 @@
-" Code folding configuration file
+""" Code folding configuration file
 
 
 
