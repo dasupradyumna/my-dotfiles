@@ -15,32 +15,38 @@ let g:netrw_browse_split = 4
 let g:netrw_list_hide = '.*\.swp$'
 let g:netrw_hide = 1
 
+" NetRW window number should always be 1, fixed position in any tab
+let s:netrw_winnr = 1
 
 augroup NetRWAuto
   autocmd!
 
-  " Always open NetRW; but if file is opened, move focus to it
-  " NetRW window always has fixed size ( width=30 )
-  autocmd StdinReadPre * let s:std_in = 1
-  autocmd VimEnter *
-  \   Vexplore |
-  \   let s:netrw_winnr = winnr() |
-  \   vertical resize 30 |
-  \   set winfixwidth |
-  \   set winfixheight |
-  \   if argc() > 0 || exists('s:std_in') |
-  \     wincmd p |
+  " Always open NetRW once in every tab
+  " Move window focus to file if not blank
+  " NetRW window always has fixed size and position
+  autocmd BufEnter *
+  \   if !gettabvar(tabpagenr(), 'NetrwIsOpen', 0) |
+  \     call settabvar(tabpagenr(), 'NetrwIsOpen', 1) |
+  \     let s:ActiveWin = empty(bufname()) ? 1 : 2 |
+  \     execute '15 Lexplore ' . getcwd() |
+  \     set winfixwidth |
+  \     set winfixheight |
+  \     execute s:ActiveWin . 'wincmd w' |
+  \     if tabpagenr('$') > 1 | unlet s:ActiveWin | endif |
+  \   elseif exists('s:ActiveWin') && &filetype ==# 'netrw' |
+  \     execute s:ActiveWin . 'wincmd w' |
+  \     unlet s:ActiveWin |
   \   endif
 
   " Close the tab if NetRW is the only window left
   autocmd BufEnter *
-  \   if winnr('$') == 1 && bufname() ==# 'NetrwTreeListing' |
+  \   if winnr('$') == 1 && &filetype ==# 'netrw' |
   \     quit |
   \   endif
 
   " Exit Vim if NetRW is the only window in the only tab
   autocmd BufEnter *
-  \   if tabpagenr('$') == 1 && winnr('$') == 1 && bufname() ==# 'NetrwTreeListing' |
+  \   if tabpagenr('$') == 1 && winnr('$') == 1 && &filetype ==# 'netrw' |
   \     quit |
   \   endif
 
@@ -52,8 +58,12 @@ function! s:ToggleNetRWFocus()
     let s:prev_winnr = winnr()
     execute s:netrw_winnr . 'wincmd w'
   else
-    execute s:prev_winnr . 'wincmd w'
+    execute get(s:, 'prev_winnr', 2) . 'wincmd w'
   endif
 endfunction
 
 nmap <C-n> :call <SID>ToggleNetRWFocus()<CR>
+
+" Quit all windows if 'quit' is used in Netrw window
+command Q :if &filetype == 'netrw' | qa | else | q | endif
+cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Q' : 'q')<CR>
