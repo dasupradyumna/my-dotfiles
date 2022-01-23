@@ -9,7 +9,7 @@ command Tasks echo g:tasksList
 
 " Command / function to run the task given as argument
 function! RunTask(task)
-  let s:set_env = '. venvON <VENV NAME>'     " for python virtual environments
+  let s:set_env = 'source $HOME/.virtualenv/<VENV NAME>/bin/activate'     " for python virtual environments
 
   if a:task ==? '<TASK NAME>'
     let s:run_command = '<COMMAND>'
